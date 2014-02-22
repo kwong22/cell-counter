@@ -23,7 +23,7 @@ window.onload = function() {
 	clearData();
     });
 
-    $(document).keydown(function(e){
+    $(document).keyup(function(e){
 	var key = e.which;
 	if (key == keys.LEFT) {
 	    left++;
