@@ -1,93 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cell Counter</title>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-  </head>
-  <body>
-    <div class="container" style="text-align: center">
-      <a href="#" class="click_instr">Click for instructions</a><p class="instructions" style="display: none">Left arrow key to increment left side. Right arrow key to increment right side. Down arrow key to decrement both sides. Spacebar to reset without recording. Enter key to reset and record.</p>
-      <br>
-      <a href="#" class="click_clear">Clear data</a>
-      <h2 class="counter"><b><span class="left">0</span>:<span class="right">0</span></b></h2>
-      <div class="records"></div>
-      <hr>
-      <div class="totals">
-	<h2>Totals</h2>
-	<span class="total_left">0</span>:<span class="total_right">0</span></div>
-      <br>
-      <footer>&copy; 2014 Kelvin Wong</footer>
-    </div>
-    <script>
-      var tleft = 0;
-      var tright = 0;
-      var left = 0;
-      var right = 0;
-      var lineNum = 0;
-
-      $(".click_instr").click(function(e) {
-      e.preventDefault();
-      $(".instructions").slideToggle();
-      });
-
-      $(".click_clear").click(function(e) {
-      e.preventDefault();
-      if (confirm("Are you sure you want to clear the data?")) {
-      clearData();
-      }
-      });
-
-      $(document).keydown(function(e){
-      var key = e.which;
-      if (key == 37) {
-      left++;
-      e.preventDefault();
-      } else if (key == 39) {
-      right++;
-      e.preventDefault();
-      } else if (key == 40) {
-      if (left > 0) {
-      left--;
-      }
-      if (right > 0) {
-      right--;
-      }
-      e.preventDefault();
-      } else if (key == 32) {
-      left = 0;
-      right = 0;
-      e.preventDefault();
-      } else if (key == 13) {
-      $(".records").append("<p class='data'><i>" + lineNum + "</i> | " + left + ":" + right + "</p>");
-      tleft += left;
-      tright += right;
-      left = 0;
-      right = 0;
-      lineNum++;
-      e.preventDefault();
-      }
-      displayCounts();
-      });
-
-      function displayCounts() {
-      $(".left").text(left);
-      $(".right").text(right);
-
-      $(".total_left").text(tleft);
-      $(".total_right").text(tright);
-      }
-
-      function clearData() {
-      $(".data").remove();
-      lineNum = 0;
-      left = 0;
-      right = 0;
-      tleft = 0;
-      tright = 0;
-      displayCounts();
-      }
-    </script>
-  </body>
-</html>
+<div class="header">
+  <h3>Cell Counter</h3>
+</div>
+<a href="#" class="click-instructions">Click for instructions</a><p class="instructions" style="display: none">Left arrow key to increment left side. Right arrow key to increment right side. Down arrow key to decrement both sides. Spacebar to reset without recording. Enter key to reset and record.</p>
+<a href="#" class="click-clear-data">Clear data</a>
+<h2 class="counter"><span class="left">0</span>:<span class="right">0</span></h2>
+<div class="records"></div>
+<hr>
+<div class="totals">
+  <h3>Totals</h3>
+  <span class="total-left">0</span>:<span class="total-right">0</span>
+</div>
+<div class="footer">&copy; 2014 Kelvin Wong</div>
