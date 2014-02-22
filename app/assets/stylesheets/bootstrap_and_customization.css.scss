@@ -1,1 +1,21 @@
 @import 'bootstrap';
+
+.container {
+  margin: 0 auto;
+  max-width: 730px;
+}
+
+.center {
+  text-align: center;
+}
+
+.clear-btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.footer {
+  margin-top: 16px;
+  padding: 16px auto;
+  text-align: center;
+}

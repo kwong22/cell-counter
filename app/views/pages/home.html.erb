@@ -1,13 +1,51 @@
 <div class="header">
-  <h3>Cell Counter</h3>
+  <h2 class="center">Cell Counter</h2>
 </div>
-<a href="#" class="click-instructions">Click for instructions</a><p class="instructions" style="display: none">Left arrow key to increment left side. Right arrow key to increment right side. Down arrow key to decrement both sides. Spacebar to reset without recording. Enter key to reset and record.</p>
-<a href="#" class="click-clear-data">Clear data</a>
-<h2 class="counter"><span class="left">0</span>:<span class="right">0</span></h2>
-<div class="records"></div>
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title center">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+	  Click for instructions
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+        Left arrow key to increment left side. Right arrow key to increment right side. Down arrow key to decrement both sides. Spacebar to reset both sides without recording. Enter key to reset both sides and record.
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-danger clear-btn" data-toggle="modal" data-target="#confirm-clear-data">Clear data</button>
+
+<!-- Modal -->
+<div class="modal fade" id="confirm-clear-data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to clear all the data?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary click-clear-data" data-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="counter center"><h1><span class="left">0</span>:<span class="right">0</span></h1></div>
+
+<div class="records center"></div>
 <hr>
-<div class="totals">
-  <h3>Totals</h3>
-  <span class="total-left">0</span>:<span class="total-right">0</span>
+<div class="totals center">
+  <h2>Totals</h2>
+  <h3><span class="total-left">0</span>:<span class="total-right">0</span></h3>
 </div>
 <div class="footer">&copy; 2014 Kelvin Wong</div>

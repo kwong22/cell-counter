@@ -20,10 +20,7 @@ window.onload = function() {
     });
 
     $(".click-clear-data").click(function(e) {
-	e.preventDefault();
-	if (confirm("Are you sure you want to clear the data?")) {
-	    clearData();
-	}
+	clearData();
     });
 
     $(document).keydown(function(e){
@@ -64,7 +61,7 @@ window.onload = function() {
     }
 
     function addData() {
-	$(".records").append("<p class='data'><i>" + lineNum + "</i> | " + left + ":" + right + "</p>");
+	$(".records").append("<h3 class='data'><i>" + lineNum + "</i> | " + left + ":" + right + "</h3>");
     }
 
     function resetCurrentCounts() {
