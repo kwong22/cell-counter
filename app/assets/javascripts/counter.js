@@ -38,6 +38,10 @@ window.onload = function() {
 	incrementRight();
     });
 
+    $(".decrement-both").bind('touchstart', function(e){
+	decrementBoth();
+    });
+
     $(document).keydown(function(e){
 	var key = e.which;
 	if (key == keys.SPACE) {
