@@ -15,7 +15,6 @@ window.onload = function() {
     };
 
     $(".click-instructions").click(function(e) {
-	e.preventDefault();
 	$(".instructions").slideToggle();
     });
 
@@ -23,41 +22,82 @@ window.onload = function() {
 	clearData();
     });
 
+    $(".click-reset-counts").click(function(e) {
+	resetCurrentCounts();
+    });
+
+    $(".click-record-counts").click(function(e) {
+	recordCounts();
+    });
+
+    $(".increment-left").bind('touchstart', function(e){
+	incrementLeft();
+    });
+
+    $(".increment-right").bind('touchstart', function(e){
+	incrementRight();
+    });
+
+    $(document).keydown(function(e){
+	var key = e.which;
+	if (key == keys.SPACE) {
+	    e.preventDefault(); // to prevent spacebar scrolling
+	}
+    });
+
     $(document).keyup(function(e){
 	var key = e.which;
 	if (key == keys.LEFT) {
-	    left++;
+	    incrementLeft();
 	    e.preventDefault();
 	} else if (key == keys.RIGHT) {
-	    right++;
+	    incrementRight();
 	    e.preventDefault();
 	} else if (key == keys.DOWN) {
-	    if (left > 0) {
-		left--;
-	    }
-	    if (right > 0) {
-		right--;
-	    }
+	    decrementBoth();
 	    e.preventDefault();
 	} else if (key == keys.SPACE) {
 	    resetCurrentCounts();
 	    e.preventDefault();
 	} else if (key == keys.ENTER) {
-	    addData();
-	    tleft += left;
-	    tright += right;
-	    resetCurrentCounts();
-	    lineNum++;
+	    recordCounts();
 	    e.preventDefault();
 	}
-	updateCounts();
     });
+
+    function incrementLeft() {
+	left++;
+	updateCounts();
+    }
+
+    function incrementRight() {
+	right++;
+	updateCounts();
+    }
+
+    function decrementBoth() {
+	if (left > 0) {
+	    left--;
+	}
+	if (right > 0) {
+	    right--;
+	}
+	updateCounts();
+    }
 
     function updateCounts() {
 	$(".left").text(left);
 	$(".right").text(right);
 	$(".total-left").text(tleft);
 	$(".total-right").text(tright);
+    }
+
+    function recordCounts() {
+	addData();
+	tleft += left;
+	tright += right;
+	resetCurrentCounts();
+	lineNum++;
     }
 
     function addData() {
@@ -67,12 +107,14 @@ window.onload = function() {
     function resetCurrentCounts() {
 	left = 0;
 	right = 0;
+	updateCounts();
     }
 
     function resetTotalCounts() {
 	tleft = 0;
 	tright = 0;
 	lineNum = 0;
+	updateCounts();
     }
 
     function clearData() {
