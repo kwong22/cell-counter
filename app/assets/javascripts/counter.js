@@ -5,6 +5,7 @@ window.onload = function() {
     var left = 0;
     var right = 0;
     var lineNum = 0;
+    var sidesList = [];
 
     var keys = {
 	LEFT: 37,
@@ -12,6 +13,11 @@ window.onload = function() {
 	DOWN: 40,
 	SPACE: 32,
 	ENTER: 13
+    };
+
+    var sides = {
+	LEFT: 0,
+	RIGHT: 1
     };
 
     $(".click-instructions").click(function(e) {
@@ -38,13 +44,13 @@ window.onload = function() {
 	incrementRight();
     });
 
-    $(".decrement-both").bind('touchstart', function(e){
-	decrementBoth();
+    $(".decrement-last").bind('touchstart', function(e){
+	decrementLast();
     });
 
     $(document).keydown(function(e){
 	var key = e.which;
-	if (key == keys.SPACE) {
+	if (key == keys.SPACE || key == keys.LEFT || key == keys.RIGHT || key == keys.DOWN || key == keys.ENTER) {
 	    e.preventDefault(); // to prevent spacebar scrolling
 	}
     });
@@ -58,7 +64,7 @@ window.onload = function() {
 	    incrementRight();
 	    e.preventDefault();
 	} else if (key == keys.DOWN) {
-	    decrementBoth();
+	    decrementLast();
 	    e.preventDefault();
 	} else if (key == keys.SPACE) {
 	    resetCurrentCounts();
@@ -71,22 +77,28 @@ window.onload = function() {
 
     function incrementLeft() {
 	left++;
+	sidesList.push(sides.LEFT);
 	updateCounts();
     }
 
     function incrementRight() {
 	right++;
+	sidesList.push(sides.RIGHT);
 	updateCounts();
     }
 
-    function decrementBoth() {
-	if (left > 0) {
-	    left--;
+    function decrementLast() {
+	var len = sidesList.length;
+	if (len > 0) {
+	    if (sidesList[len - 1] == sides.LEFT) {
+		sidesList.pop();
+		left--;
+	    } else if (sidesList[len - 1] == sides.RIGHT) {
+		sidesList.pop();
+		right--;
+	    }
+	    updateCounts();
 	}
-	if (right > 0) {
-	    right--;
-	}
-	updateCounts();
     }
 
     function updateCounts() {
@@ -112,6 +124,7 @@ window.onload = function() {
 	left = 0;
 	right = 0;
 	updateCounts();
+	clearSidesList();
     }
 
     function resetTotalCounts() {
@@ -119,6 +132,11 @@ window.onload = function() {
 	tright = 0;
 	lineNum = 0;
 	updateCounts();
+	clearSidesList();
+    }
+
+    function clearSidesList() {
+	sidesList.length = 0;
     }
 
     function clearData() {
@@ -127,4 +145,5 @@ window.onload = function() {
 	resetTotalCounts();
 	updateCounts();
     }
+
 }
